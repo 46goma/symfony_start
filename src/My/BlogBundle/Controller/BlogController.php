@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class BlogController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="blog_index")
      */
     public function indexAction()
     {
@@ -29,7 +29,7 @@ class BlogController extends Controller
      * @param mixed $id 
      * @access public
      * @return void
-     * @Route("/show/{id}")
+     * @Route("/show/{id}", name="blog_show")
      */
     public function showAction($id)
     {
