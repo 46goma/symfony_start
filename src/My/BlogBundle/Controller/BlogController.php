@@ -22,4 +22,24 @@ class BlogController extends Controller
         $posts = $em->getRepository('MyBlogBundle:Post')->findAll();
         return array('posts' => $posts);
     }
+
+    /**
+     * showAction 
+     * 
+     * @param mixed $id 
+     * @access public
+     * @return void
+     * @Route("/show/{id}")
+     */
+    public function showAction($id)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $post = $em->getRepository('MyBlogBundle:Post')->find($id);
+        
+        if (!$post) {
+            throw $this->createNotFoundException('The post does not exist');
+        }
+        
+        return array('post' => $post);
+    }    
 }
