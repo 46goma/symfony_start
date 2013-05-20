@@ -3,7 +3,10 @@
 {% block page_title 'Blog Posts' %}
 
 {% block content %}
-
+{# ここに新しい記事を書くボタンを設置してますよ #}
+<div>
+    <a class="btn btn-primary" href="{{ path('blog_new') }}">新しい記事を書く</a>
+</div>
 <table class="table">
     <tr>
         <td>Id</td>

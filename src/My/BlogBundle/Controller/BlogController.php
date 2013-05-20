@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use My\BlogBundle\Entity\Post;
+
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/blog")
@@ -18,6 +21,7 @@ class BlogController extends Controller
      */
     public function indexAction()
     {
+        
         $em = $this->get('doctrine')->getManager();
         $posts = $em->getRepository('MyBlogBundle:Post')->findAll();
         return array('posts' => $posts);
@@ -42,4 +46,41 @@ class BlogController extends Controller
         
         return array('post' => $post);
     }    
+
+    /**
+     * newAction 
+     * 
+     * @param Request $request 
+     * @access public
+     * @return void
+     * @Route("/new", name="blog_new")
+     */
+    public function newAction(Request $request)
+    {
+        // form build
+        $form = $this->createFormBuilder(new Post())
+            ->add('title')
+            ->add('body')
+            ->getForm();
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+            // validation
+            if ($form->isValid()) {
+                // エンティティを永続化
+                $post = $form->getData();
+                $post->setCreatedAt(new \DateTime());
+                $post->setUpdatedAt(new \DateTime());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('blog_index'));
+            }
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
+    }
 }
