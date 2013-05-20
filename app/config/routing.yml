@@ -2,4 +2,3 @@ my_blog:
     resource: "@MyBlogBundle/Controller/"
     type:     annotation
     prefix:   /
-
