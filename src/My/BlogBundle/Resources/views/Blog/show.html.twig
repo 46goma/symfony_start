@@ -7,6 +7,7 @@
 <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
 <p>{{ post.body|nl2br }}</p>
 <p><a href="{{ path('blog_edit', {'id': post.id}) }}">編集する</a></p>
+<p><a href="{{ path('blog_delete', {'id': post.id}) }}">削除する</a></p>
 <p><a href="{{ path('blog_index') }}">一覧に戻る</a></p>
 
 {% endblock content %}
