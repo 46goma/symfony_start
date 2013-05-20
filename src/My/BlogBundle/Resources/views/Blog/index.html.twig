@@ -1,4 +1,9 @@
-<h1>Blog posts</h1>
+{% extends 'MyBlogBundle::base.html.twig' %}
+
+{% block page_title 'Blog Posts' %}
+
+{% block content %}
+
 <table class="table">
     <tr>
         <td>Id</td>
@@ -18,3 +23,5 @@
     </tr>
     {% endfor %}
 </table>
+
+{% endblock content %}
