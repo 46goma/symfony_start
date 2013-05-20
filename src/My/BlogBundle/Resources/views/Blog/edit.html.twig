@@ -1,0 +1,10 @@
+{% extends 'MyBlogBundle::base.html.twig' %}
+
+{% block page_title '編集' %}
+
+{% block content %}
+<form action="{{ path('blog_edit', {'id': post.id}) }}" method="post" {{ form_enctype(form) }}>
+  {{ form_widget(form) }}
+  <button class="btn btn-primary">編集</button>
+</form>
+{% endblock content %}
